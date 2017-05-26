@@ -1,4 +1,34 @@
 <!DOCTYPE html>
+<?php
+
+function echoOrder() {
+    if (isset($_POST["submit"])) {
+        $pizza = FALSE;
+        $milk = FALSE;
+        $sausages = FALSE;
+        echo "<h2>Order:</h2>";
+        if ($_POST["pizza"]) {
+            echo "<img src='imgs/pizza.jpg' width='120' height='120'> - Pizza: {$_POST["pizza"]} pcs.<br/>";
+            $pizza = TRUE;
+        }
+        if ($_POST["milk"]) {
+            echo "<img src='imgs/milk.jpg' width='120' height='120'> - Milk: {$_POST["milk"]} pcs.<br/>";
+            $milk = TRUE;
+        }
+        if ($_POST["sausages"]) {
+            echo "<img src='imgs/sausage.jpg' width='120' height='120'> - Sausages: {$_POST["sausages"]} pcs.<br/>";
+            $sausages = TRUE;
+        }
+        if ($pizza or $milk or $sausages) {
+            $date = date("H:i:s d M Y");
+
+            echo "Total: " . ($_POST["pizza"] + $_POST["milk"] + $_POST["sausages"]) . "<br/>";
+            echo "Today: {$date}<br/>";
+            echo "Delivery: {$_POST["delivery"]}";
+        }
+    }
+}
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -44,36 +74,7 @@
             </form>
             <div class="answer">
                 <?php
-                    if (isset($_POST["submit"]))
-                    {
-                        $pizza = FALSE;
-                        $milk = FALSE;
-                        $sausages = FALSE;
-                        echo "<h2>Order:</h2>";
-                        if ($_POST["pizza"])
-                        {
-                            echo "<img src='imgs/pizza.jpg' width='120' height='120'> - Pizza: {$_POST["pizza"]} pcs.<br/>";
-                            $pizza = TRUE;
-                        }
-                        if ($_POST["milk"])
-                        {
-                            echo "<img src='imgs/milk.jpg' width='120' height='120'> - Milk: {$_POST["milk"]} pcs.<br/>";
-                            $milk = TRUE;
-                        }
-                        if ($_POST["sausages"])
-                        {
-                            echo "<img src='imgs/sausage.jpg' width='120' height='120'> - Sausages: {$_POST["sausages"]} pcs.<br/>";
-                            $sausages = TRUE;
-                        }
-                        if ($pizza or $milk or $sausages)
-                        {
-                            $date = date("H:i:s d M Y");
-                            
-                            echo "Total: ".($_POST["pizza"] + $_POST["milk"] + $_POST["sausages"])."<br/>";
-                            echo "Today: {$date}<br/>";
-                            echo "Delivery: {$_POST["delivery"]}";
-                        }
-                    }
+                    echoOrder();
                 ?>
             </div>
         </div>  
